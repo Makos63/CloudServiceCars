@@ -1,0 +1,12 @@
+FROM makos63/firstimage:latest
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --reinstall pkg-config cmake-data
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libmysqlclient-dev
+
+COPY . /usr/src/
+WORKDIR /usr/src/
+
+RUN cmake .
+RUN make
+
+CMD ./Provider $rpcIp $rpcPort

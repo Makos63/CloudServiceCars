@@ -1,0 +1,54 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+/Central/Central
+/Sensor/Sensor
+
+
+#directories
+/Central/cmake-build-debug/
+/Sensor/cmake-build-debug/
+
+
+#cache
+/Central/CMakeCache.txt
+/Sensor/CMakeCache.txt
+/docker/Central/.idea/
+/docker/Sensor/.idea/
+/docker/cmake-build-debug/
+/docker/Mariadb/node1d/.user_scripts_initialized
+/docker/Mariadb/node2d/.user_scripts_initialized
+/docker/Mariadb/node3d/.user_scripts_initialized
+/Documents/SC_P3/
+
+#workspace
+/.idea/workspace.xml

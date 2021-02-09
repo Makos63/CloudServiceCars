@@ -1,0 +1,2 @@
+# Hashes of file build rules.
+3faaf1c57df773f59c5051b10096b85f dataproto.pb.cc

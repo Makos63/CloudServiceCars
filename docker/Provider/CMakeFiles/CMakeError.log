@@ -1,0 +1,186 @@
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /mnt/d/Users/Christian/Documents/h_da/VS-WS20-21/docker/Provider/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_cafb6/fast && make: Warning: File 'Makefile' has modification time 0.89 s in the future
+/usr/bin/make -f CMakeFiles/cmTC_cafb6.dir/build.make CMakeFiles/cmTC_cafb6.dir/build
+make[1]: Entering directory '/mnt/d/Users/Christian/Documents/h_da/VS-WS20-21/docker/Provider/CMakeFiles/CMakeTmp'
+make[1]: Warning: File 'CMakeFiles/cmTC_cafb6.dir/flags.make' has modification time 0.88 s in the future
+Building C object CMakeFiles/cmTC_cafb6.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_cafb6.dir/src.c.o   -c /mnt/d/Users/Christian/Documents/h_da/VS-WS20-21/docker/Provider/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_cafb6
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cafb6.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    CMakeFiles/cmTC_cafb6.dir/src.c.o  -o cmTC_cafb6 
+/usr/bin/ld: CMakeFiles/cmTC_cafb6.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_cafb6.dir/build.make:87: cmTC_cafb6] Error 1
+make[1]: Leaving directory '/mnt/d/Users/Christian/Documents/h_da/VS-WS20-21/docker/Provider/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_cafb6/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /mnt/d/Users/Christian/Documents/h_da/VS-WS20-21/docker/Provider/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c951c/fast && make: Warning: File 'Makefile' has modification time 0.89 s in the future
+/usr/bin/make -f CMakeFiles/cmTC_c951c.dir/build.make CMakeFiles/cmTC_c951c.dir/build
+make[1]: Entering directory '/mnt/d/Users/Christian/Documents/h_da/VS-WS20-21/docker/Provider/CMakeFiles/CMakeTmp'
+make[1]: Warning: File 'CMakeFiles/cmTC_c951c.dir/flags.make' has modification time 0.87 s in the future
+Building C object CMakeFiles/cmTC_c951c.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_c951c.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_c951c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c951c.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_c951c.dir/CheckFunctionExists.c.o  -o cmTC_c951c  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_c951c.dir/build.make:87: cmTC_c951c] Error 1
+make[1]: Leaving directory '/mnt/d/Users/Christian/Documents/h_da/VS-WS20-21/docker/Provider/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_c951c/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /mnt/d/Users/Christian/Documents/h_da/VS-WS20-21/docker/Provider/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_997b5/fast && make: Warning: File 'Makefile' has modification time 0.89 s in the future
+/usr/bin/make -f CMakeFiles/cmTC_997b5.dir/build.make CMakeFiles/cmTC_997b5.dir/build
+make[1]: Entering directory '/mnt/d/Users/Christian/Documents/h_da/VS-WS20-21/docker/Provider/CMakeFiles/CMakeTmp'
+make[1]: Warning: File 'CMakeFiles/cmTC_997b5.dir/flags.make' has modification time 0.87 s in the future
+Building C object CMakeFiles/cmTC_997b5.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_997b5.dir/src.c.o   -c /mnt/d/Users/Christian/Documents/h_da/VS-WS20-21/docker/Provider/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_997b5
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_997b5.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    CMakeFiles/cmTC_997b5.dir/src.c.o  -o cmTC_997b5 
+/usr/bin/ld: CMakeFiles/cmTC_997b5.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_997b5.dir/build.make:87: cmTC_997b5] Error 1
+make[1]: Leaving directory '/mnt/d/Users/Christian/Documents/h_da/VS-WS20-21/docker/Provider/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_997b5/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /mnt/d/Users/Christian/Documents/h_da/VS-WS20-21/docker/Provider/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_ecb16/fast && make: Warning: File 'Makefile' has modification time 0.88 s in the future
+/usr/bin/make -f CMakeFiles/cmTC_ecb16.dir/build.make CMakeFiles/cmTC_ecb16.dir/build
+make[1]: Entering directory '/mnt/d/Users/Christian/Documents/h_da/VS-WS20-21/docker/Provider/CMakeFiles/CMakeTmp'
+make[1]: Warning: File 'CMakeFiles/cmTC_ecb16.dir/flags.make' has modification time 0.87 s in the future
+Building C object CMakeFiles/cmTC_ecb16.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_ecb16.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_ecb16
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ecb16.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_ecb16.dir/CheckFunctionExists.c.o  -o cmTC_ecb16  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_ecb16.dir/build.make:87: cmTC_ecb16] Error 1
+make[1]: Leaving directory '/mnt/d/Users/Christian/Documents/h_da/VS-WS20-21/docker/Provider/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_ecb16/fast] Error 2
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /mnt/d/Users/Christian/Documents/h_da/VS-WS20-21/docker/Provider/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_289af/fast && make: Warning: File 'Makefile' has modification time 0.9 s in the future
+/usr/bin/make -f CMakeFiles/cmTC_289af.dir/build.make CMakeFiles/cmTC_289af.dir/build
+make[1]: Entering directory '/mnt/d/Users/Christian/Documents/h_da/VS-WS20-21/docker/Provider/CMakeFiles/CMakeTmp'
+make[1]: Warning: File 'CMakeFiles/cmTC_289af.dir/flags.make' has modification time 0.88 s in the future
+Building C object CMakeFiles/cmTC_289af.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_289af.dir/src.c.o   -c /mnt/d/Users/Christian/Documents/h_da/VS-WS20-21/docker/Provider/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_289af
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_289af.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    CMakeFiles/cmTC_289af.dir/src.c.o  -o cmTC_289af 
+/usr/bin/ld: CMakeFiles/cmTC_289af.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_289af.dir/build.make:87: cmTC_289af] Error 1
+make[1]: Leaving directory '/mnt/d/Users/Christian/Documents/h_da/VS-WS20-21/docker/Provider/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_289af/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /mnt/d/Users/Christian/Documents/h_da/VS-WS20-21/docker/Provider/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c0577/fast && make: Warning: File 'Makefile' has modification time 0.9 s in the future
+/usr/bin/make -f CMakeFiles/cmTC_c0577.dir/build.make CMakeFiles/cmTC_c0577.dir/build
+make[1]: Entering directory '/mnt/d/Users/Christian/Documents/h_da/VS-WS20-21/docker/Provider/CMakeFiles/CMakeTmp'
+make[1]: Warning: File 'CMakeFiles/cmTC_c0577.dir/flags.make' has modification time 0.88 s in the future
+Building C object CMakeFiles/cmTC_c0577.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_c0577.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_c0577
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c0577.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_c0577.dir/CheckFunctionExists.c.o  -o cmTC_c0577  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_c0577.dir/build.make:87: cmTC_c0577] Error 1
+make[1]: Leaving directory '/mnt/d/Users/Christian/Documents/h_da/VS-WS20-21/docker/Provider/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_c0577/fast] Error 2
+
+
+

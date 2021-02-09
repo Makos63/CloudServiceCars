@@ -1,0 +1,84 @@
+#docker-compose down -v -f -> deletes the volumes if entrypoint has
+#to be rerun
+version: '3.7'
+services:
+  mariadb1:
+    image: mariadb:latest
+    volumes:
+      #- mariadb:/var/lib/mysql
+      - ./master1/conf:/etc/mysql/mysql.conf.d/
+      - ./master1/data:/var/lib/mysql
+      - ./master1/log/:/var/log/mysql
+      - ./master1/mariadb.setup/:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_INITDB_SKIP_TZINFO: 1
+      TZ: "Europe/Berlin"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+      MYSQL_DATABASE: "vsTest"
+      MYSQL_USER: "public"
+      MYSQL_PASSWORD: "public"
+      MYSQL_ROOT_PASSWORD: "root"
+    env_file: node1d/env.txt
+    networks:
+      frontend:
+        ipv4_address: 172.20.1.110
+
+
+  mariadb2:
+    image: mariadb:latest
+    volumes:
+      #- mariadb2:/var/lib/mysql
+      - ./master2/conf:/etc/mysql/mysql.conf.d/
+      - ./master2/data:/var/lib/mysql
+      - ./master2/log/:/var/log/mysql
+      - ./master2/mariadb.setup/:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_INITDB_SKIP_TZINFO: 1
+      TZ: "Europe/Berlin"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+      MYSQL_DATABASE: "vsTest"
+      MYSQL_USER: "public"
+      MYSQL_PASSWORD: "public"
+      MYSQL_ROOT_PASSWORD: "root"
+    env_file: node2d/env.txt
+    networks:
+      frontend:
+        ipv4_address: 172.20.1.111
+
+
+
+volumes:
+    mariadb:
+    mariadb2:
+networks:
+  frontend:
+    ipam:
+      config:
+        - subnet: 172.20.1.0/24
+
+
+    #master1/conf:/etc/mysql/mysql.conf.d/
+    #master1/data:/var/lib/mysql
+    #master1/log/:/var/log/mysql
+    #master1/:/backup
+
+    #docker run --name mysql1
+    #-e MYSQL_ROOT_PASSWORD=mysql1pass
+    #-e MYSQL_DATABASE=mydata -dit -p 33061:3306
+    #-v /opt2/mysql/server1/conf.d:/etc/mysql/mysql.conf.d/
+    #-v /opt2/mysql/server1/data:/var/lib/mysql
+    #-v /opt2/mysql/server1/log:/var/log/mysql
+    #-v /opt2/mysql/server1/backup:/backup
+    #-h  mysql1 mysql
+
+
+
+    #docker run --name mysql2 --link mysql1
+    #-e MYSQL_ROOT_PASSWORD=mysql2pass
+    #-e MYSQL_DATABASE=mydata -dit
+    #-p 33062:3306
+    #-v /opt2/mysql/server2/conf.d:/etc/mysql/mysql.conf.d/
+    #-v /opt2/mysql/server2/data:/var/lib/mysql
+    #-v /opt2/mysql/server2/log:/var/log/mysql
+    #-v /opt2/mysql/server2/backup:/backup
+    #-h  mysql2 mysql

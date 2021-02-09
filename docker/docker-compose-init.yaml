@@ -1,0 +1,104 @@
+#docker-compose down -v -f -> deletes the volumes if entrypoint has
+#to be rerun
+version: '3.7'
+
+services:
+  fix-mariadb-volume-ownership1:
+    image: 'bitnami/mariadb:10.2'
+    user: root
+    command: chown -R 1001:1001 /bitnami
+    volumes:
+      - 'node1d:/bitnami'
+    networks:
+      myNetwork:
+        ipv4_address: 172.20.3.1
+
+  fix-mariadb-volume-ownership2:
+    image: 'bitnami/mariadb:10.2'
+    user: root
+    command: chown -R 1001:1001 /bitnami
+    volumes:
+      - 'node2d:/bitnami'
+    networks:
+      myNetwork:
+        ipv4_address: 172.20.3.2
+
+  fix-mariadb-volume-ownership3:
+    image: 'bitnami/mariadb:10.2'
+    user: root
+    command: chown -R 1001:1001 /bitnami
+    volumes:
+      - 'node3d:/bitnami'
+    networks:
+      myNetwork:
+        ipv4_address: 172.20.3.3
+
+  node1:
+    image: 'docker.io/bitnami/mariadb-galera:10.2'
+    ports:
+      - '3306:3306'
+      - '4444:4444'
+      - '4567:4567'
+      - '4568:4568'
+    volumes:
+      - 'node1d:/bitnami/mariadb'
+      - 'mariaconf:/docker-entrypoint-initdb.d'
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_ROOT_PASSWORD=root
+      - REPLICATION_PASSWORD=test
+      - TZ=Europe/Berlin
+      - MYSQL_DATABASE=vsTest
+      - MYSQL_USER=public
+      - MYSQL_PASSWORD=public
+      - MARIADB_GALERA_CLUSTER_BOOTSTRAP=yes
+      - MARIADB_REPLICATION_USER=test
+      - MARIADB_REPLICATION_PASSWORD=test
+      - MARIADB_GALERA_CLUSTER_NAME=myCluster
+      - MARIADB_GALERA_MARIABACKUP_USER=backupTest
+      - MARIADB_GALERA_MARIABACKUP_PASSWORD=backupTest
+      - MARIADB_GALERA_FORCE_SAFETOBOOTSTRAP=yes
+    networks:
+      myNetwork:
+        ipv4_address: 172.20.0.10
+    healthcheck:
+      test: ['CMD', '/opt/bitnami/scripts/mariadb-galera/healthcheck.sh']
+      interval: 15s
+      timeout: 5s
+      retries: 2
+
+
+volumes:
+  node1d:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: './Mariadb/node1d'
+  node2d:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: './Mariadb/node2d'
+  node3d:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: './Mariadb/node3d'
+  mariaconf:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: './Mariadb/node1d/mariadb.setup'
+
+networks:
+  myNetwork:
+    name: myNetwork
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/22

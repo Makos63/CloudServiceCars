@@ -1,0 +1,20 @@
+Functional requierments:
+-   secure sensor data in service provider servers
+-   live sensor data access
+-   old sensor data access
+-   monitoring website
+-   
+
+Non-functional requierments:
+-   RPC Thrift connection between Central and Service provider
+-   Postgres DB  for sensor data protection
+-   system redundancy
+-   possible high system performance
+-   sensors can basic GETs 
+-   sensors communucation with central via UDP/MQTT
+-   webserver for central
+-   IPs Ports,Type of sensor has to be logged
+-   system self check - functional test
+-   performance test
+-   debug with logfiles
+-   

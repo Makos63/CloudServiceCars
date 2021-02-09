@@ -1,0 +1,17 @@
+FROM gcc:9.2
+ENV sensorMode "$sensorMode"
+ENV sensorDesIP "$sensorDesIP"
+ENV sensorDesPort "$sensorDesPort"
+ENV brookerIP "$brookerIP"
+ENV id "$id"
+RUN apt-get update && apt-get upgrade -y && apt-get install cmake -y
+RUN apt-get install --reinstall pkg-config cmake-data -y
+RUN apt-get install libmosquitto-dev libmosquittopp-dev libssl-dev -y
+#RUN apt-get update && apt-get upgrade -y
+#RUN apt-get install cmake -y
+COPY . /usr/src/sensor/
+WORKDIR /usr/src/sensor/
+
+RUN cmake .
+RUN make
+CMD ./Sensor $sensorMode $sensorDesIP $sensorDesPort $brookerIP $id

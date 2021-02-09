@@ -1,0 +1,241 @@
+version: '3.7'
+
+services:
+  provider:
+    build:
+      context: Provider
+      dockerfile: dockerProvider
+    environment:
+      rpcPort: 45000
+      rpcIp: 172.20.0.30
+    restart: unless-stopped
+    networks:
+      myNetwork:
+        ipv4_address: 172.20.0.30
+
+
+  provider2:
+    build:
+      context: Provider
+      dockerfile: dockerProvider
+    environment:
+      rpcPort: 45000
+      rpcIp: 172.20.0.31
+    restart: unless-stopped
+
+    networks:
+      myNetwork:
+        ipv4_address: 172.20.0.31
+
+
+  provider3:
+    build:
+      context: Provider
+      dockerfile: dockerProvider
+    environment:
+      rpcPort: 45000
+      rpcIp: 172.20.0.32
+    restart: unless-stopped
+    networks:
+      myNetwork:
+        ipv4_address: 172.20.0.32
+
+  central:
+    build:
+      context: Central
+      dockerfile: dockerCentral
+    environment:
+      rpcDesPort: 45000
+      rpcDesIp: 172.20.0.30
+      brokerIP: 172.20.0.110
+      id: 1
+    restart: unless-stopped
+    ports:
+      - 80:8080/tcp
+    networks:
+      myNetwork:
+        ipv4_address: 172.20.0.60
+    depends_on:
+    - provider
+
+  mosquitto:
+    image: eclipse-mosquitto
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./MqttBroker/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    networks:
+      myNetwork:
+        ipv4_address: 172.20.0.110
+
+
+  avgspeed_sensor:
+    build:
+      context: Sensor
+      dockerfile: dockerSensor
+    environment:
+      sensorMode: avgSpeedSensor
+      sensorDesIP: 172.20.0.60
+      sensorDesPort: 50000
+      brookerIP: 172.20.0.110
+      id: 1
+    networks:
+      myNetwork:
+        ipv4_address: 172.20.1.10
+    depends_on:
+    - central
+
+  fuel_sensor:
+    build:
+      context: Sensor
+      dockerfile: dockerSensor
+    environment:
+      sensorMode: fuelSensor
+      sensorDesIP: 172.20.0.60
+      sensorDesPort: 50000
+      brookerIP: 172.20.0.110
+      id: 1
+    networks:
+      myNetwork:
+        ipv4_address: 172.20.1.11
+    depends_on:
+    - central
+
+  mileage_sensor:
+    build:
+      context: Sensor
+      dockerfile: dockerSensor
+    environment:
+      sensorMode: mileageSensor
+      sensorDesIP: 172.20.0.60
+      sensorDesPort: 50000
+      brookerIP: 172.20.0.110
+      id: 1
+    networks:
+      myNetwork:
+        ipv4_address: 172.20.1.12
+    depends_on:
+    - central
+
+  traffic_sensor:
+    build:
+      context: Sensor
+      dockerfile: dockerSensor
+    environment:
+      sensorMode: trafficSensor
+      sensorDesIP: 172.20.0.60
+      sensorDesPort: 50000
+      brookerIP: 172.20.0.110
+      id: 1
+    networks:
+      myNetwork:
+        ipv4_address: 172.20.1.13
+    depends_on:
+    - central
+
+
+
+
+
+
+
+
+
+
+
+
+  central2:
+    build:
+      context: Central
+      dockerfile: dockerCentral
+    environment:
+      rpcDesPort: 45000
+      rpcDesIp: 172.20.0.30
+      brokerIP: 172.20.0.111
+      id: 2
+    restart: unless-stopped
+    ports:
+      - 81:8080/tcp
+    networks:
+      myNetwork:
+        ipv4_address: 172.20.1.81
+    depends_on:
+      - provider
+
+  mosquitto2:
+    image: eclipse-mosquitto
+    ports:
+      - "1884:1883"
+    volumes:
+      - ./MqttBroker/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    networks:
+      myNetwork:
+        ipv4_address: 172.20.0.111
+
+
+  avgspeed_sensor2:
+    build:
+      context: Sensor
+      dockerfile: dockerSensor
+    environment:
+      sensorMode: avgSpeedSensor
+      sensorDesIP: 172.20.0.61
+      sensorDesPort: 50000
+      brookerIP: 172.20.0.111
+      id: 2
+    networks:
+      myNetwork:
+        ipv4_address: 172.20.1.14
+    depends_on:
+      - central2
+
+  fuel_sensor2:
+    build:
+      context: Sensor
+      dockerfile: dockerSensor
+    environment:
+      sensorMode: fuelSensor
+      sensorDesIP: 172.20.0.61
+      sensorDesPort: 50000
+      brookerIP: 172.20.0.111
+      id: 2
+    networks:
+      myNetwork:
+        ipv4_address: 172.20.1.15
+    depends_on:
+      - central2
+
+  mileage_sensor2:
+    build:
+      context: Sensor
+      dockerfile: dockerSensor
+    environment:
+      sensorMode: mileageSensor
+      sensorDesIP: 172.20.0.61
+      sensorDesPort: 50000
+      brookerIP: 172.20.0.111
+      id: 2
+    networks:
+      myNetwork:
+        ipv4_address: 172.20.1.16
+    depends_on:
+      - central2
+
+  traffic_sensor2:
+    build:
+      context: Sensor
+      dockerfile: dockerSensor
+    environment:
+      sensorMode: trafficSensor
+      sensorDesIP: 172.20.0.61
+      sensorDesPort: 50000
+      brookerIP: 172.20.0.111
+      id: 2
+    networks:
+      myNetwork:
+        ipv4_address: 172.20.1.17
+    depends_on:
+      - central2
+networks:
+  myNetwork:
+    external: true
